@@ -11,7 +11,7 @@ struct Media_properties {
     int file_size_bytes;
     int resolution_width;
     int resolution_height;
-    enum class Format { MP4, AVI, MKV } format;
+    enum class Format : uint8_t { MP4, AVI, MKV } format;
     std::string file_url;
     std::string thumbnail_url;
 };
@@ -31,7 +31,8 @@ class Video {
 
         Media_properties properties;
         Timestamps timestamps;
-        enum class Status { DRAFT, PUBLISHED, ARCHIVED, REMOVED, PROCESSING } status;
+        enum class Status : uint8_t { DRAFT, PUBLISHED, ARCHIVED, REMOVED, PROCESSING } status;
+
 };
 
 
