@@ -2,12 +2,7 @@
 #include <iostream>
 
 int main() {
-    Video video;
-
-    video.id = 1;
-    video.title = "Hello";
-    video.description = "World";
-    video.slug = "hello-world";
+    Video video {};
 
     auto bytes = serialize_video(video);
 
