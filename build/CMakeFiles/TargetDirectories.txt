@@ -1,4 +1,0 @@
-/Users/shahmunjafri/VideoUploading/build/CMakeFiles/main.dir
-/Users/shahmunjafri/VideoUploading/build/CMakeFiles/tests.dir
-/Users/shahmunjafri/VideoUploading/build/CMakeFiles/edit_cache.dir
-/Users/shahmunjafri/VideoUploading/build/CMakeFiles/rebuild_cache.dir
