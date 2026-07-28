@@ -29,6 +29,9 @@ Pager::~Pager() {
 }
 
 Page* Pager::getPage(size_t pageNumber){
+    if (pageNumber >= num_pages) {
+        throw std::out_of_range("Invalid page number");
+    }
     //check unordered map
     auto it = pages.find(pageNumber);
     if(it != pages.end()){
@@ -55,8 +58,8 @@ void Pager::flushPage(size_t pageNumber){
 }
 
 size_t Pager::allocateNewPage(){
-    num_pages++;
     size_t pageNumber = num_pages;
+    num_pages++;
     pages[pageNumber] = Page{};
     pages[pageNumber].is_dirty = true;
     return pageNumber;
