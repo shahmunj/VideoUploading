@@ -18,9 +18,9 @@ Most backend projects reach for SQLite, Postgres, or an ORM, and never think twi
   - Manual byte-level manipulation with `reinterpret_cast` and pointer arithmetic
 - **Test suite** — round-trip correctness tests, edge cases (empty strings, long strings, boundary values), and hand-verified byte-count checks
 - **Build system** — CMake, with a separate test executable
+- **Pager** — page-based file I/O with in-memory caching, so the database doesn't rewrite the entire file on every write
 
 ### 🚧 In Progress / Planned
-- **Pager** — page-based file I/O with in-memory caching, so the database doesn't rewrite the entire file on every write
 - **B-Tree** — the indexing structure that makes lookups fast (O(log n)) instead of scanning every record — the same core structure real databases like SQLite use internally
 - **C++ API layer** — `insert`, `findById`, `delete`, wrapping the B-Tree
 - **HTTP server, built from scratch** — raw TCP socket handling and manual HTTP request/response parsing, no library
