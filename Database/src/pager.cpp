@@ -1,4 +1,4 @@
-#include "pager.hpp"
+#include "../include/pager.hpp"
 
 Pager::Pager(const std::string& filename) : file() {
     file.open(filename, std::ios::in | std::ios::out | std::ios::binary);
@@ -38,13 +38,10 @@ Page* Pager::getPage(size_t pageNumber){
         return &it->second;
     } 
     //if not in memory, load it from disk
-    Page page{};
+    Page& newPage = pages[pageNumber];
     file.seekg(pageNumber * PAGE_SIZE, std::ios::beg);
-    file.read(reinterpret_cast<char*>(page.data), PAGE_SIZE);
-
-    //add to unordered map
-    pages[pageNumber] = page;
-    return &pages[pageNumber];
+    file.read(reinterpret_cast<char*>(newPage.data), PAGE_SIZE);
+    return &newPage;
 }
 
 void Pager::flushPage(size_t pageNumber){
@@ -60,8 +57,8 @@ void Pager::flushPage(size_t pageNumber){
 size_t Pager::allocateNewPage(){
     size_t pageNumber = num_pages;
     num_pages++;
-    pages[pageNumber] = Page{};
-    pages[pageNumber].is_dirty = true;
+    Page& newPage = pages[pageNumber];
+    newPage.is_dirty = true;
     return pageNumber;
 }
 

@@ -1,4 +1,4 @@
-#include "video_serializer.hpp"
+#include "../include/video_serializer.hpp"
 
 std::vector<uint8_t> serialize_video(const Video& video) {
     std::vector<uint8_t> serialized_data;
