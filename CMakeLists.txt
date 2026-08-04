@@ -21,3 +21,16 @@ add_executable(pager_tests
     Database/tests/test_pager.cpp
     Database/src/pager.cpp
 )
+
+add_executable(node_tests
+    Database/tests/test_node.cpp
+    Database/src/btree/node.cpp
+    Database/src/btree/internal_node.cpp
+)
+
+add_executable(integration_test
+    Database/tests/test_integration.cpp
+    Database/src/pager.cpp
+    Database/src/btree/node.cpp
+    Database/src/btree/internal_node.cpp
+)
