@@ -7,24 +7,24 @@
 #include <string>
 
 struct Media_properties {
-    int duration_seconds = 0;
-    int file_size_bytes = 0;
-    int resolution_width = 0;
-    int resolution_height = 0;
+    uint32_t duration_seconds = 0;
+    uint32_t file_size_bytes = 0;
+    uint32_t resolution_width = 0;
+    uint32_t resolution_height = 0;
     enum class Format : uint8_t { MP4, AVI, MKV } format = Format::MP4;
     std::string file_url = "";
     std::string thumbnail_url = "";
 };
 
 struct Timestamps {
-    time_t created_at = 0;
-    time_t uploaded_at = 0;
-    time_t updated_at = 0;
+    uint64_t created_at = 0;
+    uint64_t uploaded_at = 0;
+    uint64_t updated_at = 0;
 };
 
 class Video {
     public:
-        unsigned int id = 0;
+        uint32_t id = 0;
         std::string title = "";
         std::string description = "";
         std::string slug = "";

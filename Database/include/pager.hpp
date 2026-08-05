@@ -16,12 +16,12 @@ class Pager {
         Pager(const std::string& filename);
         ~Pager(); 
 
-        Page* getPage(size_t pageNumber);
-        void flushPage(size_t pageNumber);
-        size_t allocateNewPage();
+        Page* getPage(uint64_t pageNumber);
+        void flushPage(uint64_t pageNumber);
+        uint64_t allocateNewPage();
 
     private:
         std::fstream file;
-        std::unordered_map<size_t, Page> pages;
-        size_t num_pages = 0;
+        std::unordered_map<uint64_t, Page> pages;
+        uint64_t num_pages = 0;
 };

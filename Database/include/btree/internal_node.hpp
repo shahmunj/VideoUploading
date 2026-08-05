@@ -4,14 +4,13 @@
 #include <cstdint>
 #include <cstddef>
 
-size_t keyOffset(uint32_t index);
-size_t pointerOffset(uint32_t index);
+uint64_t keyOffset(uint32_t index); 
+uint64_t pointerOffset(uint32_t index);    
 
-unsigned int readKeyAt(Page* page, uint32_t index);
-void writeKeyAt(Page* page, uint32_t index, unsigned int key);
+uint32_t readKeyAt(Page* page, uint32_t index);
+void writeKeyAt(Page* page, uint32_t index, uint32_t key);
 
-size_t readChildPointerAt(Page* page, uint32_t index);
-void writeChildPointerAt(Page* page, uint32_t index, size_t childPageNumber);
+uint64_t readChildPointerAt(Page* page, uint32_t index);   
+void writeChildPointerAt(Page* page, uint32_t index, uint64_t childPageNumber); 
 
-size_t findChildPage(Page* page, unsigned int targetKey);
-
+uint64_t findChildPage(Page* page, uint32_t targetKey); 

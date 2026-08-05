@@ -15,7 +15,7 @@ Pager::Pager(const std::string& filename) : file() {
     }
 
     file.seekg(0, std::ios::end);
-    size_t file_size = file.tellg();
+    uint64_t file_size = file.tellg();
     num_pages = file_size / PAGE_SIZE;
 }
 
@@ -28,7 +28,7 @@ Pager::~Pager() {
     file.close();
 }
 
-Page* Pager::getPage(size_t pageNumber){
+Page* Pager::getPage(uint64_t pageNumber){
     if (pageNumber >= num_pages) {
         throw std::out_of_range("Invalid page number");
     }
@@ -44,7 +44,7 @@ Page* Pager::getPage(size_t pageNumber){
     return &newPage;
 }
 
-void Pager::flushPage(size_t pageNumber){
+void Pager::flushPage(uint64_t pageNumber){
     Page& page = pages.at(pageNumber);
     if(!page.is_dirty){
         return;
@@ -54,8 +54,8 @@ void Pager::flushPage(size_t pageNumber){
     page.is_dirty = false;
 }
 
-size_t Pager::allocateNewPage(){
-    size_t pageNumber = num_pages;
+uint64_t Pager::allocateNewPage(){
+    uint64_t pageNumber = num_pages;
     num_pages++;
     Page& newPage = pages[pageNumber];
     newPage.is_dirty = true;

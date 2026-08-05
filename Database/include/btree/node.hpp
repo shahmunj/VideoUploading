@@ -3,6 +3,7 @@
 
 enum class NodeType : uint8_t { LEAF, INTERNAL };
 
+constexpr size_t HEADER_OFFSET = 0;
 constexpr size_t HEADER_SIZE = 5;
 
 NodeType getNodeType(Page* page);
