@@ -6,10 +6,10 @@
 #include <vector>
 
 unsigned int readLeafKeyAt(Page* page, uint32_t index);
-void writeLeafKeyAt(Page* page, uint32_t index, unsigned int key);
+void writeLeafKeyAt(Page* page, uint32_t index, uint32_t key);
 
 uint64_t readLeafOffsetAt(Page* page, uint32_t index);
-void writeLeafOffsetAt(Page* page, uint32_t index, size_t offset);
+void writeLeafOffsetAt(Page* page, uint32_t index, uint64_t offset);
 
 uint32_t readLeafLengthAt(Page* page, uint32_t index);
 void writeLeafLengthAt(Page* page, uint32_t index, uint32_t length);

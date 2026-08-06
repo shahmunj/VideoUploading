@@ -85,6 +85,27 @@ bool leafInsert(Page* page, uint32_t key, const std::vector<uint8_t>& record){
     if(space_avail < space_needed){
         return false;
     }
-
+    //calculate the new record's key, offset, and length
+    uint32_t new_record_key = key;
+    uint32_t new_record_length = static_cast<uint32_t>(record.size());
+    uint64_t new_record_offset = currentRecordsStart(page) - new_record_length;
     
+    //use the helper functions to write the record
+    writeLeafKeyAt(page, numKeys, new_record_key);
+    writeLeafLengthAt(page, numKeys, new_record_length);
+    writeLeafOffsetAt(page, numKeys, new_record_offset);
+    
+    memcpy(page->data + new_record_offset, record.data(), new_record_length);
+
+    numKeys++;
+    setNumKeys(page, numKeys);
+
+    page->is_dirty = true;
+    return true;
+}
+
+std::vector<uint8_t> readRecordAt(Page* page, uint64_t offset, uint32_t length){
+    std::vector<uint8_t> record(length);
+    memcpy(record.data(), page->data + offset, length);
+    return record;
 }
