@@ -13,18 +13,6 @@ size_t leafFieldOffset(uint32_t index, size_t fieldOffset) {
     return HEADER_SIZE + (index * ENTRY_SIZE) + fieldOffset;
 }
 
-template <typename T>
-T readFieldAt(Page* page, size_t offset) {
-    T value;
-    memcpy(&value, page->data + offset, sizeof(T));
-    return value;
-}
-template <typename T>
-void writeFieldAt(Page* page, size_t offset, const T& value) {
-    memcpy(page->data + offset, &value, sizeof(T));
-    page->is_dirty = true;
-}
-
 uint32_t readLeafKeyAt(Page* page, uint32_t index) {
     return readFieldAt<uint32_t>(page, leafFieldOffset(index, KEY_OFFSET));
 }

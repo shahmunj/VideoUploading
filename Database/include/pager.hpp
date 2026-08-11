@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <string>
 
-constexpr size_t PAGE_SIZE = 4096;
+constexpr uint64_t PAGE_SIZE = 4096;
 
 struct Page {
     uint8_t data[PAGE_SIZE];
@@ -19,6 +19,8 @@ class Pager {
         Page* getPage(uint64_t pageNumber);
         void flushPage(uint64_t pageNumber);
         uint64_t allocateNewPage();
+
+        uint64_t getNumPages() const;
 
     private:
         std::fstream file;

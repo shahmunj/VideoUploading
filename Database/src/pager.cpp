@@ -62,3 +62,7 @@ uint64_t Pager::allocateNewPage(){
     return pageNumber;
 }
 
+uint64_t getNumPages() const{
+    return num_pages;
+}
+

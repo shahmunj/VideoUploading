@@ -27,6 +27,7 @@ add_executable(node_tests
     Database/src/btree/node.cpp
     Database/src/btree/internal_node.cpp
     Database/src/btree/leaf_node.cpp
+    Database/src/btree/meta_page.cpp
 )
 add_executable(integration_test
     Database/tests/test_integration.cpp
