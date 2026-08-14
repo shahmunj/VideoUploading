@@ -15,9 +15,34 @@ BTree::BTree(Pager& pager) : pager(pager) {
         setFormatVersion(metaPage, 1);
 
         rootPage = rootPageNum;
-
     } else {
         Page* metapage = pager.getPage(0);
         rootPage = getTreeRootPage(metapage);
     }
+}
+
+void insert(const Video& video){
+    std::vector<uint8_t> record = serialize_video(video);
+    Page* root = pager.getPage(rootPage);
+
+    bool success = leafInsert(root, video.id, record);
+
+    if (!success) {
+        throw std::runtime_error("Page full — splitting not yet implemented");
+    }
+}
+
+Video find(uint32_t video_id){
+    Page* root = pager.getPage(rootPage);
+    uint64_t offset;
+    uint32_t length;
+
+    bool success = leafFind(root, video_id, offset, length);
+
+    if(!success){
+        throw std::runtime_error("Page full — splitting not yet implemented");
+    }
+
+    std::vector<uint8_t>& video_data = readRecordAt(root, offset, length);
+    Video video = deserialize(video_data);
 }
