@@ -14,14 +14,14 @@ BTree::BTree(Pager& pager) : pager(pager) {
         setTreeRootPage(metaPage, rootPageNum);
         setFormatVersion(metaPage, 1);
 
-        rootPage = rootPageNum;
+        this->rootPage = rootPageNum;
     } else {
         Page* metapage = pager.getPage(0);
-        rootPage = getTreeRootPage(metapage);
+        this->rootPage = getTreeRootPage(metapage);
     }
 }
 
-void insert(const Video& video){
+void BTree::insert(const Video& video){
     std::vector<uint8_t> record = serialize_video(video);
     Page* root = pager.getPage(rootPage);
 
@@ -32,7 +32,7 @@ void insert(const Video& video){
     }
 }
 
-Video find(uint32_t video_id){
+Video BTree::find(uint32_t video_id){
     Page* root = pager.getPage(rootPage);
     uint64_t offset;
     uint32_t length;
@@ -40,9 +40,11 @@ Video find(uint32_t video_id){
     bool success = leafFind(root, video_id, offset, length);
 
     if(!success){
-        throw std::runtime_error("Page full — splitting not yet implemented");
+        throw std::runtime_error("Video not found");
     }
 
-    std::vector<uint8_t>& video_data = readRecordAt(root, offset, length);
-    Video video = deserialize(video_data);
+    std::vector<uint8_t> video_data = readRecordAt(root, offset, length);
+    Video video = deserialize_video(video_data);
+
+    return video;
 }

@@ -36,3 +36,14 @@ add_executable(integration_test
     Database/src/btree/internal_node.cpp
     Database/src/btree/leaf_node.cpp
 )
+
+add_executable(btree_integration_test
+    Database/tests/test_btree_integration.cpp
+    Database/src/pager.cpp
+    Database/src/video_serializer.cpp
+    Database/src/btree/node.cpp
+    Database/src/btree/internal_node.cpp
+    Database/src/btree/leaf_node.cpp
+    Database/src/btree/meta_page.cpp
+    Database/src/btree/btree.cpp
+)

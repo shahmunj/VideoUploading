@@ -1,6 +1,7 @@
 #pragma once
 #include "../pager.hpp"
 #include "../video.hpp"
+#include "../video_serializer.hpp"
 #include "node.hpp"
 #include "leaf_node.hpp"
 #include "meta_page.hpp"
