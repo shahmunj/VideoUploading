@@ -1,0 +1,36 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release -- -j$(nproc)
+
+      - name: Run serializer tests
+        run: ./build/serializer_tests
+
+      - name: Run pager tests
+        run: ./build/pager_tests
+
+      - name: Run node tests (internal + leaf + meta page)
+        run: ./build/node_tests
+
+      - name: Run integration test
+        run: ./build/integration_test
+
+      - name: Run BTree integration test
+        run: ./build/btree_integration_test
